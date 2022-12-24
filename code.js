@@ -12,7 +12,7 @@ function getComputerChoice(){
 }
 var playChoice = ""
 
-
+//getPlayerChoice promts the user for input which is converted to lower case
 function getPlayerChoice(){
     let playerChoice = prompt("Type 'rock', 'paper' or 'scissors'");
     if (playerChoice.toLowerCase()==="rock"){
@@ -26,87 +26,89 @@ function getPlayerChoice(){
     }
     else getPlayerChoice()
     //return playerChoice;
-    playerChoice = playerChoice
+    playChoice = playerChoice
 
 }
-var i = 5;
 
-function startTimer() {
-
-    var countdownTimer = setInterval(function() {
-
-        console.log(i);
-        i = i - 1;
-
-        if (i <= 0) {
-            clearInterval(countdownTimer);
-        }
-
-    }, 1000);
-
-}
 
 
 let totalPlayerPoints = 0
 let totalComputerPoints = 0
 let playerPoints
 let computerPoints
+let round = 0
 
 function playRound(){
     getPlayerChoice();
+    console.log("You chose " + playChoice)
     
     getComputerChoice();
     console.log("The computer has made its choice.")
-    //startTimer();
+    
     console.log("The computer chose " + selectedValue);
     
 
     if (playChoice == "rock" && cpuChoice == "scissors"){
         console.log("Rock beats scissors. You've won this round")
-        playerPoints = totalPlayerPoints + 3
-        computerPoints = totalComputerPoints + 0
+        totalPlayerPoints++
+        
 
     } else if (playChoice == "rock" && cpuChoice == "paper"){
         console.log("Paper beats scissors. You lose this round")
-        playerPoints = totalPlayerPoints + 0
-        computerPoints = totalComputerPoints + 3
+        totalComputerPoints++
     
     } else if (playChoice == "rock" && cpuChoice == "rock"){
         console.log("You both chose rock. Its a tie")
-        playerPoints = totalPlayerPoints + 1
-        computerPoints = totalComputerPoints + 1
+        
     
     } else if (playChoice == "paper" && cpuChoice == "paper"){
         console.log("You both chose paper. Its a tie")
-        playerPoints = totalPlayerPoints + 1
-        computerPoints = totalComputerPoints + 1
+        
     
     } else if (playChoice == "paper" && cpuChoice == "rock"){
         console.log("Paper beats rock. You've won this round")
-        playerPoints = totalPlayerPoints + 3
-        computerPoints = totalComputerPoints + 0
+        totalPlayerPoints++
     
     } else if (playChoice == "paper" && cpuChoice == "scissors"){
         console.log("Scissors beats paper. You lose this round")
-        playerPoints = totalPlayerPoints + 0
-        computerPoints = totalComputerPoints + 3
+        totalComputerPoints++
     
     } else if (playChoice == "scissors" && cpuChoice == "rock"){
         console.log("Rock beats scissors. You lose this round")
-        playerPoints = totalPlayerPoints + 0
-        computerPoints = totalComputerPoints + 3
+       totalComputerPoints++
     
     } else if (playChoice == "scissors" && cpuChoice == "scissors"){
         console.log("You both chose scissors. Its a tie")
-        playerPoints = totalPlayerPoints + 1
-        computerPoints = totalComputerPoints + 1
+       
     
-    } else if (playChoice == "scissors" && cpuChoice == "paper"){
+    } else {
         console.log("Scissors beats paper. You've won this round")
-        playerPoints = totalPlayerPoints + 3
-        computerPoints = totalComputerPoints + 0
+        totalPlayerPoints++
     } 
     
-    console.log("Your points: " + playerPoints)
+    //console.log("You have " + totalPlayerPoints + " points")
+    
 }
+
+function game(){
+
+    for(round = 0; round < 5; round++) {
+        playRound();
+    }
+    //console.log("The computer has " + computerPoints + " points")
+
+    if (totalPlayerPoints > totalComputerPoints){
+        console.log("You win!")
+    }
+    else if (totalPlayerPoints < totalComputerPoints){
+        console.log("You lose.")
+    }
+    else {
+        console.log("its a tie!")
+    }
+    console.log("You had: " + totalPlayerPoints + "points")
+    console.log("The computer had: " + totalComputerPoints + "points")
+
+}
+
 
